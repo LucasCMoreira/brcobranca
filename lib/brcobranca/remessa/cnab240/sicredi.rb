@@ -136,18 +136,7 @@ module Brcobranca
           # digito conta            1
           # digito agencia/conta    1
           # ident. titulo no banco  20
-
-
-          var_nosso_numero_with_byte_idt = "20#{byte_idt}#{pagamento.nosso_numero}"
-          
-          var_agencia_posto_conta =  "#{agencia}#{posto}#{convenio}"
-          
-          var_nosso_numero_dv = "#{var_agencia_posto_conta}#{var_nosso_numero_with_byte_idt}"
-          .modulo11(mapeamento: mapeamento_para_modulo_11)
-          
-          var_nosso_numero = "#{var_nosso_numero_with_byte_idt[0..1]}#{var_nosso_numero_with_byte_idt[2..-1]}#{var_nosso_numero_dv}"
-
-          "#{conta_corrente.rjust(12, '0')}#{digito_conta}#{var_nosso_numero}"
+          "#{conta_corrente.rjust(12, '0')}#{digito_conta} #{formata_nosso_numero(pagamento.nosso_numero)}"
         end
 
         # Retorna o nosso numero
@@ -157,7 +146,19 @@ module Brcobranca
           #nosso_numero.somente_numeros.ljust(20, ' ')
           "#{nosso_numero_with_byte_idt[0..1]}#{nosso_numero_with_byte_idt[2..-1]}#{nosso_numero_dv}"
         end
+
+        def nosso_numero_with_byte_idt
+          "#{data_processamento.strftime('%y')}#{byte_idt}#{nosso_numero}"
+        end
+
+        def nosso_numero_dv
+          "#{agencia_posto_conta}#{nosso_numero_with_byte_idt}"
+            .modulo11(mapeamento: mapeamento_para_modulo_11)
+        end
         
+        def agencia_posto_conta
+          "#{agencia}#{posto}#{convenio}"
+        end
 
         def codigo_desconto(pagamento)
           '1'
