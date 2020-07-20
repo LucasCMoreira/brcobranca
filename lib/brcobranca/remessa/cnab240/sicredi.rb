@@ -143,7 +143,21 @@ module Brcobranca
         #
         # @return [String]
         def formata_nosso_numero(nosso_numero)
-          nosso_numero.somente_numeros.ljust(20, ' ')
+          #nosso_numero.somente_numeros.ljust(20, ' ')
+          "#{nosso_numero_with_byte_idt[0..1]}#{nosso_numero_with_byte_idt[2..-1]}#{nosso_numero_dv}"
+        end
+
+        def nosso_numero_with_byte_idt
+          "#{data_processamento.strftime('%y')}#{byte_idt}#{nosso_numero}"
+        end
+
+        def nosso_numero_dv
+          "#{agencia_posto_conta}#{nosso_numero_with_byte_idt}"
+            .modulo11(mapeamento: mapeamento_para_modulo_11)
+        end
+        
+        def agencia_posto_conta
+          "#{agencia}#{posto}#{convenio}"
         end
 
         def codigo_desconto(pagamento)
