@@ -145,7 +145,7 @@ module Brcobranca
           var_nosso_numero_dv = "#{var_agencia_posto_conta}#{var_nosso_numero_with_byte_idt}"
           .modulo11(mapeamento: mapeamento_para_modulo_11)
           
-          var_nosso_numero = "#{var_nosso_numero_with_byte_idt[0..1]}/#{var_nosso_numero_with_byte_idt[2..-1]}-#{var_nosso_numero_dv}"
+          var_nosso_numero = "#{var_nosso_numero_with_byte_idt[0..1]}#{var_nosso_numero_with_byte_idt[2..-1]}#{var_nosso_numero_dv}"
 
           "#{conta_corrente.rjust(12, '0')}#{digito_conta}#{var_nosso_numero}"
         end
