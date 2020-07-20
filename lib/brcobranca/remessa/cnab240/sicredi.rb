@@ -147,17 +147,17 @@ module Brcobranca
           "#{nosso_numero_with_byte_idt[0..1]}#{nosso_numero_with_byte_idt[2..-1]}#{nosso_numero_dv}"
         end
 
-        def nosso_numero_with_byte_idt
-          "20#{byte_idt}#{nosso_numero}"
+        def nosso_numero_with_byte_idt(pagamento)
+          "#{pagamento.data_vencimento.strftime('%y')}#{pagamento.byte_idt}#{pagamento.nosso_numero}"
         end
 
-        def nosso_numero_dv
-          "#{agencia_posto_conta}#{nosso_numero_with_byte_idt}"
+        def nosso_numero_dv(pagamento)
+          "#{pagamento.agencia_posto_conta}#{nosso_numero_with_byte_idt}"
             .modulo11(mapeamento: mapeamento_para_modulo_11)
         end
         
-        def agencia_posto_conta
-          "#{agencia}#{posto}#{convenio}"
+        def agencia_posto_conta(pagamento)
+          "#{pagamento.agencia}#{pagamento.posto}#{pagamento.convenio}"
         end
 
         def codigo_desconto(pagamento)
