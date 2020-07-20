@@ -148,7 +148,7 @@ module Brcobranca
         end
 
         def nosso_numero_with_byte_idt
-          "#{data_vencimento.strftime('%y')}#{byte_idt}#{nosso_numero}"
+          "20#{byte_idt}#{nosso_numero}"
         end
 
         def nosso_numero_dv
