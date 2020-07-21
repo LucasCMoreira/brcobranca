@@ -147,7 +147,7 @@ module Brcobranca
           
           var_nosso_numero = "#{var_nosso_numero_with_byte_idt[0..1]}#{var_nosso_numero_with_byte_idt[2..-1]}#{var_nosso_numero_dv}"
 
-          "#{conta_corrente.rjust(12, '0')}#{digito_conta}#{var_nosso_numero}"
+          "#{conta_corrente}#{digito_conta}#{var_nosso_numero}".rjust(20, '0')
         end
 
         # Retorna o nosso numero
