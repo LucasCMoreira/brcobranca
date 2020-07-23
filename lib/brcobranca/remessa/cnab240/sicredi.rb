@@ -138,7 +138,7 @@ module Brcobranca
           # ident. titulo no banco  20
 
 
-          var_nosso_numero_with_byte_idt = "20#{byte_idt}#{pagamento.nosso_numero}"
+          var_nosso_numero_with_byte_idt = "#{Time.now.strftime('%y')}#{byte_idt}#{pagamento.nosso_numero}"
           
           var_agencia_posto_conta =  "#{agencia}#{posto}#{convenio}"
           
@@ -160,7 +160,7 @@ module Brcobranca
         
 
         def codigo_desconto(pagamento)
-          '1'
+          '0'
         end
 
         def codigo_baixa(pagamento)
