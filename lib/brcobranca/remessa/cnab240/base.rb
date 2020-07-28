@@ -320,14 +320,14 @@ module Brcobranca
             contador += 1
             lote << monta_segmento_q(pagamento, nro_lote, contador)
             contador += 1
-            if self.respond_to?(:monta_segmento_r)
-              seg_r = monta_segmento_r(pagamento, nro_lote, contador)
+            # if self.respond_to?(:monta_segmento_r)
+            #   seg_r = monta_segmento_r(pagamento, nro_lote, contador)
 
-              if seg_r.present?
-                lote << seg_r
-                contador += 1
-              end
-            end
+            #   if seg_r.present?
+            #     lote << seg_r
+            #     contador += 1
+            #   end
+            # end
           end
           contador += 1 #trailer
 
@@ -359,11 +359,11 @@ module Brcobranca
         end
 
         def total_segmentos(pagamentos)
-          if self.respond_to?(:monta_segmento_r)
-            pagamentos.size * 3
-          else
+          # if self.respond_to?(:monta_segmento_r)
+          #   pagamentos.size * 3
+          # else
             pagamentos.size * 2
-          end
+          # end
         end
 
         # Complemento do registro
